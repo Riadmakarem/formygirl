@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riad & Jennifer - Nosso Amor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #FFF6F9;
+            overflow-x: hidden;
+            color: #B44B4B;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animações de corações */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: #F7CAC9;
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            50% { transform: translateY(-100px) rotate(180deg); }
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(90deg, #F7CAC9 60%, #E6B7C1 100%);
+            backdrop-filter: blur(6px);
+            padding: 1rem 0;
+            box-shadow: 0 8px 32px #E6B7C1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #B44B4B;
+            text-shadow: 2px 2px 4px #FADADD;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: #B44B4B;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: #FADADD;
+        }
+
+        .nav-menu a:hover {
+            background: #E6B7C1;
+            color: #B44B4B;
+            transform: translateY(-2px);
+        }
+
+        /* Seções */
+        .section {
+            min-height: 100vh;
+            padding: 4rem 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .section-content {
+            background: #FFF6F9;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px #FADADD;
+            margin: 2rem 0;
+        }
+
+        /* Home */
+        .home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #F7CAC9 0%, #FADADD 100%);
+        }
+
+        .home-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #D36C6C, #B44B4B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .home-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #B44B4B;
+        }
+
+        .btn-start {
+            background: linear-gradient(45deg, #E6B7C1, #D36C6C);
+            color: #FFF6F9;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px #FADADD;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px #E6B7C1;
+        }
+
+        /* Galeria */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .photo-card {
+            background: #FFF6F9;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px #FADADD;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .photo-placeholder {
+            height: 250px;
+            background: linear-gradient(45deg, #F7CAC9, #FADADD);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #B44B4B;
+            font-size: 1.2rem;
+        }
+
+        .photo-caption {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #D36C6C, #B44B4B);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-content {
+            background: #FFF6F9;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px #FADADD;
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -30px;
+            border-left-color: white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -30px;
+            border-right-color: white;
+        }
+
+        .timeline-date {
+            position: static;
+            display: inline-block;
+            margin-top: 1rem;
+            background: linear-gradient(45deg, #D36C6C, #B44B4B);
+            color: #FFF6F9;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 1;
+            font-size: 1rem;
+        }
+
+        /* Cartas */
+        .letter {
+            background: linear-gradient(135deg, #F7CAC9, #FADADD);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            box-shadow: 0 10px 30px #E6B7C1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter::before {
+            content: '💕';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: #D36C6C;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Contador */
+        .counter {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, #FADADD, #E6B7C1);
+            color: #B44B4B;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .counter-number {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #B44B4B;
+        }
+
+        .counter-label {
+            font-size: 1.5rem;
+            color: #D36C6C;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 60px);
+                left: 60px !important;
+            }
+
+            .timeline-content::before {
+                left: -30px !important;
+                border-right-color: white !important;
+                border-left-color: transparent !important;
+            }
+
+            .timeline-date {
+                left: 30px;
+                transform: translateY(-50%);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animação de corações -->
+    <div class="hearts" id="hearts"></div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Riad & Jennifer 💕</div>
+            <ul class="nav-menu">
+                <li><a href="#home" onclick="showSection('home')">Início</a></li>
+                <li><a href="#gallery" onclick="showSection('gallery')">Galeria</a></li>
+                <li><a href="#story" onclick="showSection('story')">Nossa História</a></li>
+                <li><a href="#letters" onclick="showSection('letters')">Cartas de Amor</a></li>
+                <li><a href="#fa" onclick="showSection('fa')">Fã</a></li>
+                <li><a href="#surprise" onclick="showSection('surprise')">Surpresa</a></li>               
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Seção Home -->
+    <section id="home" class="section home">
+        <div class="container">
+            <div class="home-content">
+                <h1>Riad & Jennifer</h1>
+                <p>Desde 2024 construindo nossa história de amor 💕</p>
+                <button class="btn-start" onclick="showSection('gallery')">
+                    Clique para reviver nossa história ✨
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Galeria -->
+    <section id="gallery" class="section hidden">
+        <div class="container">
+            <div class="section-content">
+                <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem; color: #ff6b6b;">📸 Nossos Momentos</h2>
+                <div class="gallery-grid">
+                    <div class="photo-card">
+                        <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                            <img src="picture/start.jpg" alt="Nossa primeira festa junina" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                        </div>
+                        <div class="photo-caption">
+                            <h3>O inicio de tudo</h3>
+                            <p>Onde mais você me espionava</p>
+                        </div>
+                    <div class="photo-card">
+                        <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                            <img src="picture/1encontro.jpg" alt="Nosso primeiro encontro" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                        </div>
+                        <div class="photo-caption">
+                            <h3>Nosso primeiro encontro</h3>
+                            <p>O dia em que tudo começou... 🥰</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                            <img src="picture/junina.jpg" alt="Nossa primeira festa junina" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                        </div>
+                        <div class="photo-caption">
+                            <h3>Nossa primeira festa junina</h3>
+                            <p>onde você foi pela primeira vez a minha esposa</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                            <img src="picture/niver.jpg" alt="Aniversário" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                        </div>
+                        <div class="photo-caption">
+                            <h3>Celebrando o amor</h3>
+                            <p>Cada momento é especial com você 💖</p>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                            <img src="picture/gostosona.jpg" alt="Passeio Romântico" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                        </div>
+                        <div class="photo-caption">
+                            <h3>Passeio fotografico</h3>
+                            <p>Cada vez que você sorria era um motivo a mais para me apaixonar ainda mais por você</p>
+                        </div>
+                        </div>
+                    <div class="photo-card">
+                        <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                            <img src="picture/escola.jpg" alt="Passeio Romântico" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                        </div>
+                        <div class="photo-caption">
+                            <h3>Nosso maior tempo juntos</h3>
+                            <p>Onde eu te encantei e você se deixou levar pelo amor</p>
+                        </div>
+                        </div>
+                    <div class="photo-card">
+                        <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                            <img src="picture/beijao.jpg" alt="Passeio Romântico" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                        </div>
+                        <div class="photo-caption">
+                            <h3>mais ensaios</h3>
+                            <p>aqui você ja estava caidinha por mim</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- Botão Próximo fixo embaixo à direita -->
+                <div style="position: fixed; right: 40px; bottom: 40px; z-index: 100;">
+                    <button class="btn-start" onclick="showSection('story')">Próximo &rarr;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botão Próximo na Galeria -->
+
+    <!-- Seção Nossa História -->
+    <section id="story" class="section hidden">
+        <div class="container">
+            <div class="section-content">
+                <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: #ff6b6b;">📝 Nossa História</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Como nos conhecemos</h3>
+                            <p>nem sabia quem era Jennifer naquele tempo no maternal, mas ja avia te encontrado e deixado minha marquinha em você 💫</p>
+                        </div>
+                        <div class="timeline-date">2010-2012</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>tempo depois</h3>
+                            <p>Nos encontramos de novo no idaam, onde foi o comeciiinho de nada de alguma coisa maior 💕</p>
+                        </div>
+                        <div class="timeline-date">2022</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>segundo ano</h3>
+                            <p>Você não queria muito saber de mim mas ja estava lá eu tentando me aproximar da tal Jennifer e seus amgs estranhos..... Não consegui tanto mas pelo menos você ja me via</p>
+                        </div>
+                        <div class="timeline-date">2023</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>terceiro ano</h3>
+                            <p>E FINALMENTE esse tal terceiro ano, era agora ou nunca, e eu estava determinado a fazer você ver o quanto você significa para mim. Entrei no seu grupinho de amigos e não te largava mais pra nada, acho que talvez tenha ficado um pouco obvio que eu estava gostando de você, mas so um pouquinho 💖</p>
+                        </div>
+                        <div class="timeline-date">2024</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>junho</h3>
+                            <p>UM dos dias que com toda certeza vai ser um dos melhores da minha vida, foi o dia que eu pedi você em namoro e você não conseguia parar de sorrir, ai como eu amei e amo essa sensação que é a de deixar você toda sorridente 💖</p>
+                        </div>
+                        <div class="timeline-date">2024/06/12</div>
+                    </div>
+                </div>
+                <!-- Botão Próximo embaixo à direita -->
+                <div style="display: flex; justify-content: flex-end; margin-top: 2rem;">
+                    <button class="btn-start" onclick="showSection('letters')">Próximo &rarr;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Cartas de Amor -->
+    <section id="letters" class="section hidden">
+        <div class="container">
+            <div class="section-content">
+                <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: #ff6b6b;">💌 Cartas de Amor</h2>
+                
+                <div class="letter">
+                    <h3>O que eu mais amo em você</h3>
+                    <p>Amo seu sorriso que ilumina meus dias mais difíceis. Amo sua forma de pensar e ver que sempre consegue resolver tudo.  Amo como você me faz sentir especial todos os dias. Amo sua força, sua bondade, sua maneira única de ser. Amo como você me completa de uma forma que eu nem sabia que precisava.</p>
+                </div>
+
+                <div class="letter">
+                    <h3>10 momentos que nunca vou esquecer</h3>
+                    <p>Nosso primeiro beijo você sabe aonde... O dia em que você me disse que me amava... Nossa primeira briga e como nos acertamos depois... Nossos sustos juntos... Nossa primeira viagem juntos... O dia em que conheci sua família... Nosso primeiro Natal juntos... Quando você me surpreendeu no dia dos namorados com o melhor presente de todos... Cada "bom dia" e "boa noite" que trocamos... E este momento agora, sabendo que há muito mais por vir.</p>
+                </div>
+
+                <div class="letter">
+                    <h3>Se eu pudesse reviver um dia com você...</h3>
+                    <p>Seria o dia do nosso primeiro encontro, mas desta vez sem nervosismo, sabendo já o quanto você significa para mim. Aproveitaria cada segundo, cada palavra, cada olhar, com a certeza de que aquele era o início da nossa história de amor. Mas na verdade, prefiro olhar para frente, porque cada dia ao seu lado é uma nova oportunidade de criar memórias ainda mais especiais.</p>
+                </div>
+                <!-- Botão Próximo fixo embaixo à direita na seção Cartas de Amor -->
+                <div style="position: fixed; right: 40px; bottom: 40px; z-index: 100;">
+                    <button class="btn-start" onclick="showSection('fa')">Próximo &rarr;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Fã -->
+    <section id="fa" class="section hidden">
+        <div class="container">
+            <div class="section-content">
+            <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem; color: #D36C6C;">🌟 Sou o seu fã número 1, amor da minha vida</h2>
+            <div class="gallery-grid">
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <!-- Cole o link da foto abaixo, substituindo # pelo link da imagem -->
+                    <img src="picture/bts.jpg" alt="Foto 1" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Primeiro show no cinema</h3><p>Não faz nem tanto tempo, mas esse dia foi mt especial para mim</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/fotinha1.jpg" alt="" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Estilo Jenny de fotinha</h3><p>Ai como eu amo cada detalhe seu 2</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/fotinha2.jpg" alt="Foto 3" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Minha sonsa</h3><p>Cada detalhezinho perfeito</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/fotinha3.jpg" alt="Foto 4" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Oclin na ponta do nariz</h3><p>Esses seus olhinhos</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/fotinha4.jpg" alt="Foto 5" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Toda charmosa</h3><p>Cada vez mais linda</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/meuamor.jpg" alt="Foto 6" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Minha Mulher</h3><p>fica tão linda de chapeu</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/ixi.jpg" alt="Foto 7" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Você que lute bb</h3><p>Demorei um pouco mas cheguei</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/lindona.jpg" alt="Foto 8" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Sempre arrasando</h3><p>"ai mas como você conseguiu essas foto" shh, sem perguntas</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/minhamoleca.jpg" alt="Foto 9" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Eban</h3><p>Amo tanto essa foto</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/minhadeusa.jpg" alt="Foto 9" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Minha rainha</h3><p>obrigado por tudo que vivemos amor, vou te amar para sempre</p></div>
+                </div>
+                 <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/R+J.jpg" alt="Foto 9" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Na praia o meu amor</h3><p>Amo toda demonstração de amor que você faz com tanto carinho pra mim</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/leao.jpg" alt="Foto 9" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Minha Leãozinha</h3><p>Eu também tenho foto atual de você</p></div>
+                </div>
+
+                <!-- start  -->
+
+                </div>
+                <div class="photo-caption"><h3>Momentos com o amor da minha vida</h3><p>Cada instante ao seu lado é único e inesquecível. Obrigado por ser minha inspiração, minha alegria e meu maior presente. Te amo para sempre! 💖</p></div>
+<div class="gallery-grid">
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <!-- Cole o link da foto abaixo, substituindo # pelo link da imagem -->
+                    <img src="picture/ribeirinhos.jpg" alt="Foto 1" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Nosso passeio amazonico</h3><p>Mesmo eu passando muito mal nesse dia, amei muito o dia, e principalmente o carinho que vc teve comigo</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/pontanegra.jpg" alt="" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Ponta negra</h3><p>Amo passear com você em qualquer lugar</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/minhasushizinha.jpg" alt="Foto 3" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Primeira ida no sushi</h3><p>Você estava tãooo linda nesse dia</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/quartinho.jpg" alt="Foto 4" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>No seu quartinho</h3><p>Todos os momentos ao seu lado são tão especiais</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/vampiro.jpg" alt="Foto 5" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Minha vampirinha</h3><p>E você como sempre, arrasando na make</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/trote.jpg" alt="Foto 6" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Mais um trote no terceirão</h3><p>Esses momentos são inesquecíveis</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/shoping.jpg" alt="Foto 7" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>A gente nesse tal shoping</h3><p>Acho que você talvez goste desse passeio</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/beijo.jpg" alt="Foto 8" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Eu te amo</h3><p>De todos os beijos que eu ja te dei, nenhum se quer foi sem amor, todos os que eu dei e que eu ainda vou dar vão ser com todo o meu amor</p></div>
+                </div>
+                <div class="photo-card">
+                <div class="photo-placeholder" style="display: flex; align-items: center; justify-content: center; height: 250px;">
+                    <img src="picture/formatura.jpg" alt="Foto 9" style="max-width: 100%; max-height: 100%; display: block; margin: 0 auto;" />
+                </div>
+                <div class="photo-caption"><h3>Formatura</h3><p>Demorou esse dia mas olha, a gente esperou tanto ele chegar e ja até passou</p></div>
+                </div>
+                <!-- end  -->
+                </div>
+                <!-- Botão Próximo fixo embaixo à direita na seção Fã -->
+                <div style="position: fixed; right: 40px; bottom: 40px; z-index: 100;">
+                    <button class="btn-start" onclick="showSection('surprise')">Próximo &rarr;</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Surpresa -->
+    <section id="surprise" class="section hidden">
+        <div class="container">
+            <div class="section-content">
+                <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: #ff6b6b;">💖 Surpresa Especial</h2>
+                
+                <div class="counter">
+                    <div class="counter-number" id="daysCounter">0</div>
+                    <div class="counter-label">dias juntos e contando! 💕</div>
+                </div>
+
+                <div style="text-align: center; margin: 3rem 0;">
+                    <button class="btn-start" onclick="showSurprise()">
+                        Clique para uma surpresa especial! 🎁
+                    </button>
+                </div>
+
+                <div id="surpriseMessage" class="hidden">
+                    <div class="letter">
+                        <h3>Minha mensagem final para você</h3>
+                        <p>Jennifer, cada dia ao seu lado é um presente. Você trouxe cor para minha vida, trouxe sentido para meus dias e trouxe paz para meu coração. Obrigado por ser exatamente quem você é, por me amar como eu sou e por construir comigo esta história linda que mal começou. Te amo hoje, te amarei amanhã e te amarei para sempre. 💕</p><p>agora pode abrir o presente, espero que goste, Eu te AMO</p>
+                        <p style="text-align: center; margin-top: 2rem;">
+                            <a href="cartinha.html" class="btn-start">
+                                mais uma surpresinha 💗
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Criar corações animados
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const hearts = ['💕', '💖', '💗', '💙', '💜', '🤍', '❤️', '💘'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }, 1000);
+        }
+
+        // Mostrar seção específica
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Scroll suave para o topo
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Mostrar surpresa
+        function showSurprise() {
+            document.getElementById('surpriseMessage').classList.remove('hidden');
+            
+            // Efeito de confete
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.innerHTML = '🎉';
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-50px';
+                    confetti.style.fontSize = '2rem';
+                    confetti.style.pointerEvents = 'none';
+                    confetti.style.zIndex = '1000';
+                    confetti.style.animation = 'float 3s ease-in-out forwards';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+
+        // Contador de dias
+        function updateDaysCounter() {
+            const startDate = new Date('2024-06-12'); // Ajuste para a data real
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            document.getElementById('daysCounter').textContent = diffDays;
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            createHearts();
+            updateDaysCounter();
+        });
+    </script>
+</body>
+</html>

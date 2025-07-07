@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Amor - Para Minha Namorada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #FFF6F9 0%, #FADADD 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .notebook {
+            width: 100%;
+            max-width: 800px;
+            background: #F7CAC9;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(180, 75, 75, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notebook::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 80px;
+            width: 3px;
+            height: 100%;
+            background: #E6B7C1;
+        }
+
+        .notebook::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 60px;
+            width: 2px;
+            height: 100%;
+            background: #D36C6C;
+        }
+
+        .holes {
+            position: absolute;
+            left: 30px;
+            top: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .hole {
+            width: 20px;
+            height: 20px;
+            background: #B44B4B;
+            border-radius: 50%;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .lines {
+            position: absolute;
+            top: 0;
+            left: 100px;
+            right: 40px;
+            height: 100%;
+            opacity: 0.3;
+        }
+
+        .line {
+            height: 1px;
+            background: #E6B7C1;
+            margin: 30px 0;
+        }
+
+        .content {
+            padding: 60px 120px 60px 120px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .date {
+            text-align: right;
+            color: #B44B4B;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .greeting {
+            font-size: 1.8rem;
+            color: #D36C6C;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .letter-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #B44B4B;
+            margin-bottom: 25px;
+            text-align: justify;
+            text-indent: 40px;
+        }
+
+        .letter-text.center {
+            text-align: center;
+            text-indent: 0;
+            font-weight: bold;
+            color: #D36C6C;
+        }
+
+        .signature {
+            text-align: right;
+            font-size: 1.3rem;
+            color: #B44B4B;
+            margin-top: 40px;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: #E6B7C1;
+            font-size: 16px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(100vh) rotate(0deg); 
+                opacity: 0; 
+            }
+            10%, 90% { 
+                opacity: 0.6; 
+            }
+            50% { 
+                transform: translateY(-100px) rotate(180deg); 
+            }
+        }
+
+        .decorative-border {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            border: 2px solid #E6B7C1;
+            border-radius: 10px;
+            pointer-events: none;
+        }
+
+        .decorative-border::before {
+            content: '💕';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #F7CAC9;
+            padding: 0 10px;
+            font-size: 1.5rem;
+        }
+
+        .decorative-border::after {
+            content: '💕';
+            position: absolute;
+            bottom: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            background: #F7CAC9;
+            padding: 0 10px;
+            font-size: 1.5rem;
+        }
+
+        .corner-hearts {
+            position: absolute;
+            color: #D36C6C;
+            font-size: 1.2rem;
+        }
+
+        .corner-hearts.top-left {
+            top: 50px;
+            left: 50px;
+        }
+
+        .corner-hearts.top-right {
+            top: 50px;
+            right: 50px;
+        }
+
+        .corner-hearts.bottom-left {
+            bottom: 50px;
+            left: 50px;
+        }
+
+        .corner-hearts.bottom-right {
+            bottom: 50px;
+            right: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 40px 60px 40px 80px;
+            }
+
+            .letter-text {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+
+            .greeting {
+                font-size: 1.5rem;
+            }
+
+            .notebook::before {
+                left: 50px;
+            }
+
+            .notebook::after {
+                left: 35px;
+            }
+
+            .holes {
+                left: 15px;
+            }
+
+            .lines {
+                left: 70px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 30px 40px 30px 60px;
+            }
+
+            .letter-text {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .greeting {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animação de corações -->
+    <div class="hearts" id="hearts"></div>
+
+    <div class="notebook">
+        <!-- Furos do caderno -->
+        <div class="holes">
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+        </div>
+
+        <!-- Linhas do caderno -->
+        <div class="lines">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+
+        <!-- Bordas decorativas -->
+        <div class="decorative-border"></div>
+
+        <!-- Corações nos cantos -->
+        <div class="corner-hearts top-left">💕</div>
+        <div class="corner-hearts top-right">💖</div>
+        <div class="corner-hearts bottom-left">💗</div>
+        <div class="corner-hearts bottom-right">💘</div>
+
+        <!-- Conteúdo da carta -->
+        <div class="content">
+            <div class="date">06 de Julho, 2025</div>
+            
+            <div class="greeting">Para o amor da minha vida 💕</div>
+            
+            <div class="letter-text">
+                Meu amor, cada dia que passa eu me apaixono mais por você. É incrível como você consegue trazer luz para todos os meus dias, mesmo nos momentos mais difíceis.
+            </div>
+            
+            <div class="letter-text">
+                Eu te amo demais, de uma forma que nem consigo explicar direito. Você é minha paz, minha alegria, minha companhia favorita. Ao seu lado, eu me sinto completo e verdadeiramente feliz.
+            </div>
+            
+            <div class="letter-text">
+                Sou muito feliz ao seu lado, minha princesa. Cada momento contigo é especial, cada conversa é única, cada abraço é um pedacinho do paraíso. Você faz minha vida fazer sentido.
+            </div>
+            
+            <div class="letter-text">
+                Não vejo a hora de morarmos juntos, de acordar todos os dias do seu lado, de dividir nossa rotina, nossos sonhos, nossa vida. Quero construir um lar cheio de amor com você.
+            </div>
+            
+            <div class="letter-text">
+                Sonho com o dia em que vamos nos casar, em que vou poder te chamar de esposa e prometer na frente de todos que vou te amar para sempre. Você é a pessoa com quem quero passar o resto da minha vida.
+            </div>
+            
+            <div class="letter-text">
+                E mal posso esperar para viajarmos pelo mundo juntos, conhecer novos lugares, viver novas aventuras, criar memórias inesquecíveis. Cada destino será mais especial com você do meu lado.
+            </div>
+            
+            <div class="letter-text center">
+                Você é a minha jennyzinha, minha alma gêmea, meu amor eterno.
+            </div>
+            
+            <div class="signature">
+                Com todo meu amor,<br>
+                Seu namorado apaixonado 💕
+            </div>
+            <!-- Botão para voltar ao início do index -->
+            <div style="display: flex; justify-content: flex-end; margin-top: 40px;">
+                <a href="index.html" class="btn-start" style="text-decoration: none;">Voltar para o início</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Criar corações animados
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const hearts = ['💕', '💖', '💗', '💘', '💙', '💜', '🤍', '❤️'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                heart.style.animationDelay = Math.random() * 3 + 's';
+                
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 10000);
+            }, 2000);
+        }
+
+        // Inicializar animações
+        document.addEventListener('DOMContentLoaded', function() {
+            createHearts();
+        });
+    </script>
+</body>
+</html>
